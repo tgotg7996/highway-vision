@@ -161,6 +161,25 @@ body {
    Form Elements
    ==================================== */
 
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea {
+  background-color: var(--grey-1700) !important;
+  color: white !important;
+  border-color: var(--color-border);
+}
+
+input[type="text"]::placeholder,
+input[type="search"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted) !important;
+  opacity: 1;
+}
+
 select {
   color-scheme: dark;
 }

@@ -126,11 +126,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             <div className="flex items-center gap-4">
                 <div className="relative group hidden md:block">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-grey-400 group-focus-within:text-primary transition-colors" size={18} />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-primary transition-colors" size={18} />
                 <input 
                     type="text" 
                     placeholder="全局搜索..." 
-                    className="bg-grey-1700 border border-border-color rounded-full pl-10 pr-4 py-1.5 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-muted w-64 transition-all outline-none"
+                    className="bg-grey-1700 border border-border-color rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-muted w-64 transition-all outline-none"
                 />
                 </div>
                 <div className="h-8 w-px bg-border-color mx-2"></div>

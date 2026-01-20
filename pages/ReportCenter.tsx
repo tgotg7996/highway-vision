@@ -162,9 +162,9 @@ const ReportCenter: React.FC = () => {
 
                 {/* Filter Bar */}
                 <div className="glass-panel p-3 rounded-xl mb-4 flex flex-wrap gap-3 items-center">
-                    <div className="relative group">
-                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-primary transition-colors" size={16} />
-                        <input type="text" defaultValue="2024-03-21" className="bg-surface-dark/50 border border-white/10 text-white text-sm rounded-lg block w-40 pl-10 p-2.5 focus:ring-1 focus:ring-primary focus:border-primary placeholder-white/30 transition-all outline-none" placeholder="选择日期" />
+                    <div className="relative">
+                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={16} />
+                        <input type="text" defaultValue="2024-03-21" className="bg-grey-1700 border border-border-color text-white text-sm rounded-lg block w-40 pl-10 p-2.5 focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-muted transition-all outline-none" placeholder="选择日期" />
                     </div>
                     <div className="h-6 w-px bg-white/10 mx-1"></div>
                     {['所有区域', '所有事件类型', '状态：全部'].map((ph, i) => (
