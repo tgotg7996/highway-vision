@@ -31,8 +31,8 @@ const AlgorithmBuilder: React.FC = () => {
 
         <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
           <div>
-            <h3 className="text-white tracking-tight text-2xl font-bold leading-tight mb-2">提示词工程</h3>
-            <p className="text-grey-200 text-sm">使用自然语言定义您的检测目标。</p>
+            <h3 className="text-white tracking-tight text-2xl font-heading font-bold leading-tight mb-2">提示词工程</h3>
+            <p className="text-secondary text-sm">使用自然语言定义您的检测目标。</p>
           </div>
 
           {messages.map((msg) => (
@@ -42,7 +42,7 @@ const AlgorithmBuilder: React.FC = () => {
                 style={{ backgroundImage: msg.sender === 'system' ? 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB6Ybmtn-1jAnv3bW3UNMPm8lAL_BWA5mN9rgJB3t8CEBvF1usXJ1FJS6h7QvI3gjURBWXZd57hF5EDKSh-QzoSL9vSuibiBmlaqiv8101bAG9e6e5CdXkZmw9vhpmUOx3KmtCa4IIT-cZWrmwv7KBf8oWVp_GAZWs_FGKPUkTUoFx5VHEHZYVbSh-bf1jBAgBPVnpuaTD2QWhlmu7QOPL-xwvglLI0Gk-RfZTLtkFFvAEoxZzl87Z0or8eFsF6KyuApulRlw0WGxkU")' : 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAoGEPyZuNqj7SDMx9sw177QjkZTLHSdk7-7d7AZnhoCNcjNZDsRaD2wu5_Fs9YKBULBmwyt23B5ZPdEqzgzozmoij2bUNfoxrzmf3MaMZabXW3c-ZwSr70il2eEa8JWQMXcf4UQDoJaVv82SJG_eVTXoLiN9nQB69Q0RDS5W_oXDNJ838OySv86lsZzEfBPG9vhnTglADKch5oG3f-YGrDV7kF-JLobaQk6KCZ5yfeD8K1450O-KmTQm7KNQoEuwlPAVChl-OpJMSz")' }}
               ></div>
               <div className={`flex flex-col gap-1 items-${msg.sender === 'user' ? 'end' : 'start'} max-w-[85%]`}>
-                <p className={`text-grey-200 text-xs font-medium ${msg.sender === 'user' ? 'mr-1' : 'ml-1'}`}>
+                <p className={`text-secondary text-xs font-medium ${msg.sender === 'user' ? 'mr-1' : 'ml-1'}`}>
                   {msg.sender === 'user' ? '您' : '系统'}
                 </p>
                 <div className={`text-sm font-normal leading-relaxed rounded-2xl px-4 py-3 ${msg.sender === 'user' ? 'rounded-tr-none bg-primary/20 text-white border border-primary/20' : 'rounded-tl-none bg-grey-1600 text-white'}`}>
@@ -65,14 +65,14 @@ const AlgorithmBuilder: React.FC = () => {
 
         <div className="p-6 pt-2 bg-surface-darker">
           <div className="relative group">
-            <textarea className="w-full bg-grey-1700 text-white border border-border-color rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none h-[50px] transition-all placeholder:text-grey-400" placeholder="优化您的算法或添加约束条件..."></textarea>
+            <textarea className="w-full bg-grey-1700 text-white border border-border-color rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none h-[50px] transition-all placeholder:text-muted" placeholder="优化您的算法或添加约束条件..."></textarea>
             <button className="absolute right-2 top-1.5 p-1.5 bg-primary text-[#0f231e] rounded-lg hover:bg-white hover:text-black transition-all duration-200 shadow-lg shadow-primary/20 cursor-pointer" aria-label="Send message">
               <ArrowUp size={20} />
             </button>
           </div>
           <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
             {['+ 提高灵敏度', '+ 忽略背景', '+ 添加遮挡'].map(action => (
-                <button key={action} className="whitespace-nowrap px-3 py-1.5 rounded-full bg-grey-1600 text-xs text-grey-200 hover:text-white hover:bg-grey-1500 transition-all duration-200 border border-transparent hover:border-[#4a6b63] cursor-pointer">
+                <button key={action} className="whitespace-nowrap px-3 py-1.5 rounded-full bg-grey-1600 text-xs text-secondary hover:text-white hover:bg-grey-1500 transition-all duration-200 border border-transparent hover:border-[#4a6b63] cursor-pointer">
                     {action}
                 </button>
             ))}
@@ -84,7 +84,7 @@ const AlgorithmBuilder: React.FC = () => {
       <section className="flex-1 bg-background-dark relative flex flex-col">
         <div className="h-14 border-b border-border-color flex items-center justify-between px-6 bg-grey-1800">
             <div className="flex items-center gap-4">
-                <h2 className="text-white font-semibold text-sm">模型预览</h2>
+                <h2 className="text-white font-heading font-semibold text-sm">模型预览</h2>
                 <div className="h-4 w-px bg-border-color"></div>
                 <div className="flex items-center gap-2 text-grey-200 text-xs">
                     <ImageIcon size={16} />
@@ -161,21 +161,21 @@ const AlgorithmBuilder: React.FC = () => {
         <div className="h-16 bg-[#101817] border-t border-border-color flex items-center justify-between px-8 shrink-0">
             <div className="flex gap-8">
                 <div className="flex flex-col">
-                    <span className="text-grey-400 text-[10px] uppercase font-bold tracking-wider">精度</span>
+                    <span className="text-muted text-[10px] uppercase font-bold tracking-wider">精度</span>
                     <span className="text-white text-lg font-mono leading-none">94.2%</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-grey-400 text-[10px] uppercase font-bold tracking-wider">召回率</span>
+                    <span className="text-muted text-[10px] uppercase font-bold tracking-wider">召回率</span>
                     <span className="text-white text-lg font-mono leading-none">89.5%</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-grey-400 text-[10px] uppercase font-bold tracking-wider">推理时间</span>
-                    <span className="text-primary text-lg font-mono leading-none">12ms</span>
+                    <span className="text-muted text-[10px] uppercase font-bold tracking-wider">推理时间</span>
+                    <span className="text-data text-lg font-mono leading-none">12ms</span>
                 </div>
             </div>
             
             <div className="flex items-center gap-3">
-                <span className="text-grey-200 text-xs">置信度阈值</span>
+                <span className="text-secondary text-xs">置信度阈值</span>
                 <div className="w-32 h-1.5 bg-grey-1600 rounded-full relative cursor-pointer">
                     <div className="absolute left-0 top-0 h-full w-[75%] bg-primary rounded-full"></div>
                     <div className="absolute left-[75%] top-1/2 -translate-y-1/2 size-3 bg-white rounded-full shadow hover:scale-125 transition-transform"></div>

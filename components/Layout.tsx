@@ -26,12 +26,12 @@ const SidebarItem = ({ to, icon: Icon, label, active }: { to: string; icon: any;
     to={to}
     className={`flex items-center gap-3 px-6 py-3 transition-all duration-200 border-l-4 cursor-pointer ${
       active
-        ? 'border-primary bg-gradient-to-r from-primary/10 to-transparent text-white'
-        : 'border-transparent text-grey-200 hover:text-white hover:bg-white/5'
+        ? 'border-primary bg-gradient-to-r from-primary/10 to-transparent text-white font-medium'
+        : 'border-transparent text-secondary hover:text-white hover:bg-white/5'
     }`}
   >
     <Icon size={20} className={active ? 'text-primary' : ''} />
-    <span className="text-sm font-medium">{label}</span>
+    <span className="text-sm">{label}</span>
   </Link>
 );
 
@@ -64,18 +64,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="size-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary mr-3 border border-primary/20">
             <Eye size={20} />
           </div>
-          <h1 className="font-bold text-lg tracking-tight text-white">数字眼·智慧高速</h1>
+          <h1 className="font-heading font-bold text-lg tracking-tight text-white">数字眼·智慧高速</h1>
         </div>
 
         <div className="flex-1 overflow-y-auto py-6 flex flex-col gap-1">
-          <div className="px-6 text-[10px] font-bold text-grey-400 uppercase tracking-wider mb-2">平台管理</div>
+          <div className="px-6 text-[10px] font-bold text-tertiary uppercase tracking-wider mb-2">平台管理</div>
           
           <SidebarItem to="/" icon={LayoutDashboard} label="总控台" active={location.pathname === '/'} />
           <SidebarItem to="/algorithms" icon={BrainCircuit} label="AI大脑" active={location.pathname === '/algorithms' || location.pathname === '/builder'} />
           <SidebarItem to="/monitor" icon={Video} label="视频监控" active={location.pathname === '/monitor'} />
           <SidebarItem to="/reports" icon={BarChart3} label="报表中心" active={location.pathname === '/reports'} />
 
-          <div className="px-6 text-[10px] font-bold text-grey-400 uppercase tracking-wider mb-2 mt-6">系统配置</div>
+          <div className="px-6 text-[10px] font-bold text-tertiary uppercase tracking-wider mb-2 mt-6">系统配置</div>
           <SidebarItem to="#" icon={Settings} label="全局设置" active={false} />
           <SidebarItem to="#" icon={Users} label="用户权限" active={false} />
         </div>
@@ -91,7 +91,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             ></div>
             <div className="flex flex-col overflow-hidden">
               <span className="text-sm font-medium text-white truncate">管理员用户</span>
-              <span className="text-xs text-grey-400 truncate">admin@highway.ai</span>
+              <span className="text-xs text-muted truncate">admin@highway.ai</span>
             </div>
             <UserMenu 
               isOpen={userMenuOpen}
@@ -110,13 +110,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {location.pathname !== '/' && (
             <header className="h-16 border-b border-border-color flex items-center justify-between px-8 bg-surface-darker/50 backdrop-blur-md z-10">
             <div className="flex items-center gap-2 text-sm">
-                <span className="text-grey-200">
+                <span className="text-secondary">
                     {location.pathname === '/algorithms' ? 'AI大脑' : 
                      location.pathname === '/builder' ? 'AI大脑' :
                      location.pathname === '/monitor' ? '设备接入' : '数据分析'}
                 </span>
-                <ChevronRight size={14} className="text-grey-400" />
-                <span className="text-white font-medium">
+                <ChevronRight size={14} className="text-muted" />
+                <span className="text-white font-heading font-semibold">
                     {location.pathname === '/algorithms' ? '算法库管理' : 
                      location.pathname === '/builder' ? '新建算法' :
                      location.pathname === '/monitor' ? '实时监控' : '报表中心'}
@@ -128,12 +128,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <input 
                     type="text" 
                     placeholder="全局搜索..." 
-                    className="bg-grey-1700 border border-border-color rounded-full pl-10 pr-4 py-1.5 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-grey-400 w-64 transition-all outline-none"
+                    className="bg-grey-1700 border border-border-color rounded-full pl-10 pr-4 py-1.5 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-muted w-64 transition-all outline-none"
                 />
                 </div>
                 <div className="h-8 w-px bg-border-color mx-2"></div>
                 <button 
-                  className="relative p-2 text-grey-200 hover:text-white transition-colors duration-200 cursor-pointer" 
+                  className="relative p-2 text-secondary hover:text-white transition-colors duration-200 cursor-pointer" 
                   aria-label="Notifications"
                   onClick={() => setNotificationOpen(!notificationOpen)}
                 >

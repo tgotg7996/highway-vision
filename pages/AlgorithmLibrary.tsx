@@ -132,8 +132,8 @@ const AlgorithmLibrary: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-8 relative z-10 bg-[url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center h-full">
-      <div className="absolute inset-0 bg-grey-1800/95 backdrop-blur-sm z-0"></div>
+    <div className="flex-1 overflow-y-auto p-8 relative z-10 bg-grey-1900 h-full">
+      <div className="absolute inset-0 bg-grey-1900 z-0"></div>
       
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-8">
