@@ -1,231 +1,202 @@
-# 🛣️ Digital Eye - 智慧高速AI监控平台
+# Digital Eye Smart Highway AI - 完整项目
 
-<div align="center">
+智慧高速AI监测系统 - 前后端一体化解决方案
 
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?logo=vite)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+## 🎯 项目简介
 
-一个现代化的B2B智慧高速监控平台，提供实时视频监控、事件分析、报表生成和AI算法管理等功能。
+这是一个完整的全栈应用，用于高速公路服务区的智能监控，集成了AI算法识别、实时视频监控、事件告警管理等功能。
 
-[在线演示](#) | [功能特性](#features) | [快速开始](#quick-start)
+### 技术栈
 
-</div>
+**前端**
 
----
+- React 19 + TypeScript
+- Vite
+- React Router DOM
+- Lucide Icons
 
-## ✨ 功能特性
+**后端**
 
-### 🎯 核心功能
-
-- **📊 总控台 (MainControl)**
-  - 实时路网监控地图
-  - 动画效果的地图线路展示
-  - 事件中心、报表中心快捷访问
-  - 全局搜索、通知系统、用户菜单
-
-- **📹 视频监控 (VideoMonitor)**
-  - 实时视频流监控
-  - 网格视图/聚焦模式切换
-  - AI部件识别与标注
-  - 视频控制（播放/暂停/静音/全屏）
-  - 过滤标签动态筛选
-
-- **📈 报表中心 (ReportCenter)**
-  - 事件数据统计与分析
-  - CSV格式导出报表
-  - 实时搜索与多维度筛选
-  - 智能分页导航
-  - 数据可视化大屏
-
-- **🧠 算法库 (AlgorithmLibrary)**
-  - AI算法模型管理
-  - 算法配置与部署
-  - 性能监控
-
-- **⚙️ 算法构建器 (AlgorithmBuilder)**
-  - 可视化算法配置
-  - 参数调优界面
-  - 模型训练管理
-
-### 🎨 设计亮点
-
-- ✅ 深色主题，专业科技感UI
-- ✅ 流畅的动画效果与过渡
-- ✅ 响应式布局，适配多种屏幕
-- ✅ Glassmorphism 玻璃态设计
-- ✅ 完整的交互反馈
-
----
-
-## 🚀 快速开始
-
-### 前置要求
-
-- Node.js >= 18.0
-- npm >= 9.0
-
-### 安装
-
-```bash
-# 克隆项目
-git clone https://github.com/YOUR_USERNAME/digital-eye---smart-highway-ai.git
-
-# 进入项目目录
-cd digital-eye---smart-highway-ai
-
-# 安装依赖
-npm install
-```
-
-### 开发
-
-```bash
-# 启动开发服务器
-npm run dev
-```
-
-访问 http://localhost:5173 查看应用
-
-### 构建
-
-```bash
-# 生产环境构建
-npm run build
-
-# 预览构建结果
-npm run preview
-```
-
----
+- Node.js + Express
+- TypeScript
+- Supabase (PostgreSQL)
+- JWT Authentication
 
 ## 📁 项目结构
 
 ```
 digital-eye---smart-highway-ai/
-├── components/          # 可复用组件
-│   ├── common/         # 通用组件 (Button, Card, Modal等)
-│   └── Layout.tsx      # 布局组件
-├── pages/              # 页面组件
-│   ├── MainControl.tsx       # 总控台
-│   ├── VideoMonitor.tsx      # 视频监控
-│   ├── ReportCenter.tsx      # 报表中心
-│   ├── AlgorithmLibrary.tsx  # 算法库
-│   └── AlgorithmBuilder.tsx  # 算法构建器
-├── assets/             # 静态资源
-├── styles.css          # 全局样式
-├── types.ts            # TypeScript 类型定义
-└── App.tsx             # 应用入口
+├── frontend (根目录)
+│   ├── pages/              # 页面组件
+│   ├── components/         # 可复用组件
+│   ├── src/
+│   │   └── services/       # API服务层
+│   ├── assets/             # 静态资源
+│   └── styles.css          # 全局样式
+│
+├── backend/                # 后端API
+│   ├── src/
+│   │   ├── config/         # 配置文件
+│   │   ├── middleware/     # 中间件
+│   │   ├── routes/         # API路由
+│   │   ├── types/          # 类型定义
+│   │   └── server.ts       # 服务器入口
+│   ├── supabase/
+│   │   ├── schema.sql      # 数据库schema
+│   │   └── seed.sql        # 测试数据
+│   ├── package.json
+│   └── .env                # 环境配置
+│
+└── docs/                   # 文档（在brain目录）
+    ├── quick_start.md      # 快速启动指南
+    ├── walkthrough.md      # 实现说明
+    └── implementation_plan.md
 ```
 
----
+## 🚀 快速开始
 
-## 🛠️ 技术栈
+### 前提条件
 
-### 前端框架
+- Node.js 18+
+- npm 或 yarn
+- Supabase 账号
 
-- **React 19** - UI框架
-- **TypeScript** - 类型安全
-- **Vite** - 构建工具
-- **React Router DOM** - 路由管理
+### 1. 安装依赖
 
-### UI & 样式
+```bash
+# 安装前端依赖（根目录）
+npm install
 
-- **Tailwind CSS** - 原子化CSS
-- **Lucide React** - 图标库
-- **Glassmorphism** - 玻璃态设计
+# 安装后端依赖
+cd backend
+npm install
+```
 
-### 开发工具
+### 2. 配置环境变量
 
-- **ESLint** - 代码检查
-- **TypeScript** - 类型检查
+#### 前端 (`.env.local`)
 
----
+```bash
+VITE_API_URL=http://localhost:3001/api
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
 
-## 🎯 已实现功能
+#### 后端 (`backend/.env`)
 
-### Phase 1: 核心组件 ✅
+```bash
+PORT=3001
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
 
-- [x] NotificationPanel - 通知面板
-- [x] UserMenu - 用户菜单
-- [x] Modal - 模态框组件
+### 3. 初始化数据库
 
-### Phase 2: MainControl增强 ✅
+在 Supabase SQL Editor 中执行：
 
-- [x] 导航按钮交互
-- [x] 全局搜索功能
-- [x] 通知面板集成
-- [x] 用户菜单集成
-- [x] 地图动画效果
+1. `backend/supabase/schema.sql` - 创建表结构
+2. `backend/supabase/seed.sql` - 插入测试数据
 
-### Phase 3: VideoMonitor增强 ✅
+### 4. 启动服务
 
-- [x] 视图模式切换
-- [x] 视频控制功能
-- [x] 过滤标签交互
-- [x] UI布局优化
+```bash
+# 终端1: 启动后端
+cd backend
+npm run dev
 
-### Phase 4: ReportCenter增强 ✅
+# 终端2: 启动前端
+npm run dev
+```
 
-- [x] CSV导出功能
-- [x] 实时搜索
-- [x] 数据筛选
-- [x] 智能分页
+访问：
 
-### Phase 5-6: 待完成 🚧
+- 前端：http://localhost:5173
+- 后端API：http://localhost:3001
 
-- [ ] 算法库交互完善
-- [ ] 算法构建器功能
-- [ ] 全局设置页面
-- [ ] 用户权限管理
+## 📖 详细文档
 
----
+- [快速启动指南](file:///Users/tgotg/.gemini/antigravity/brain/bd3e3d9b-4d5f-4166-9b13-c99934e62fe9/quick_start.md) - 完整设置步骤
+- [实现说明](file:///Users/tgotg/.gemini/antigravity/brain/bd3e3d9b-4d5f-4166-9b13-c99934e62fe9/walkthrough.md) - 架构和实现细节
+- [后端API文档](file:///Users/tgotg/Desktop/服务区监测/digital-eye---smart-highway-ai/backend/README.md) - API端点说明
+- [数据库设置](file:///Users/tgotg/Desktop/服务区监测/digital-eye---smart-highway-ai/backend/DATABASE_SETUP.md) - 数据库初始化
 
-## 📝 开发日志
+## 🎨 核心功能
 
-详见 [CHANGELOG.md](CHANGELOG.md)
+### 页面模块
 
----
+1. **主控中心** (`/`) - 实时监控大屏
+2. **视频监控** (`/monitor`) - 多路视频流管理
+3. **算法库** (`/algorithms`) - AI算法管理
+4. **算法构建器** (`/builder`) - 对话式算法配置
+5. **设备管理** (`/devices`) - 摄像头设备CRUD
+6. **报告中心** (`/reports`) - 事件日志和报告
+7. **数据分析** (`/analysis`) - 统计图表
+8. **系统设置** (`/settings`) - 全局配置
+9. **用户权限** (`/permissions`) - 用户管理
+
+### API端点
+
+- `/api/algorithms` - 算法管理
+- `/api/cameras` - 摄像头管理
+- `/api/events` - 事件日志
+- `/api/users` - 用户管理
+- `/api/settings` - 系统设置
+- `/api/notifications` - 通知管理
+
+## 🔐 认证与授权
+
+使用 Supabase Auth + JWT 实现：
+
+- 三种角色：Admin、Operator、Viewer
+- 行级安全策略（RLS）
+- 基于角色的API访问控制
+
+## 📊 数据库表
+
+| 表名            | 说明         |
+| --------------- | ------------ |
+| algorithms      | AI算法配置   |
+| camera_feeds    | 摄像头设备   |
+| event_logs      | 事件告警日志 |
+| user_profiles   | 用户扩展信息 |
+| system_settings | 系统配置     |
+| notifications   | 通知记录     |
+| reports         | 报告元数据   |
+
+## 🛠️ 开发命令
+
+```bash
+# 前端
+npm run dev          # 开发模式
+npm run build        # 构建生产版本
+npm run preview      # 预览生产版本
+
+# 后端
+npm run dev          # 开发模式（自动重启）
+npm run build        # 编译TypeScript
+npm start            # 运行生产版本
+npm run typecheck    # 类型检查
+```
+
+## 📝 待办事项
+
+- [ ] 实现用户认证UI（登录/注册页面）
+- [ ] 更新前端组件使用真实API
+- [ ] 添加WebSocket支持实时推送
+- [ ] 实现文件上传（事件快照）
+- [ ] 添加单元测试
+- [ ] 部署配置
 
 ## 🤝 贡献
 
-欢迎提交 Issues 和 Pull Requests！
-
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
----
+欢迎提交 Issue 和 Pull Request！
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+MIT License
 
 ---
 
-## 👨‍💻 作者
-
-**Your Name**
-
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-
----
-
-## 🙏 致谢
-
-- UI设计灵感来自现代B2B监控平台
-- 图标由 [Lucide](https://lucide.dev/) 提供
-- 使用 [Vite](https://vitejs.dev/) 构建
-
----
-
-<div align="center">
-
-Made with ❤️ for Smart Highway Monitoring
-
-⭐ 如果这个项目对你有帮助，请给个Star！
-
-</div>
+**作者**: Digital Eye Team  
+**最后更新**: 2026-01-20
