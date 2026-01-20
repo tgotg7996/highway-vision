@@ -6,6 +6,10 @@ import AlgorithmBuilder from './pages/AlgorithmBuilder';
 import ReportCenter from './pages/ReportCenter';
 import VideoMonitor from './pages/VideoMonitor';
 import MainControl from './pages/MainControl';
+import DeviceManagement from './pages/DeviceManagement';
+import DataAnalysis from './pages/DataAnalysis';
+import Settings from './pages/Settings';
+import UserPermissions from './pages/UserPermissions';
 
 // Component to handle layout conditions
 const AppRoutes = () => {
@@ -30,6 +34,10 @@ const AppRoutes = () => {
                 <Route path="/builder" element={<AlgorithmBuilder />} />
                 <Route path="/reports" element={<ReportCenter />} />
                 <Route path="/monitor" element={<VideoMonitor />} />
+                <Route path="/devices" element={<DeviceManagement />} />
+                <Route path="/analysis" element={<DataAnalysis />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/permissions" element={<UserPermissions />} />
             </Routes>
         </Layout>
     );

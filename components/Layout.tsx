@@ -74,10 +74,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <SidebarItem to="/algorithms" icon={BrainCircuit} label="AI大脑" active={location.pathname === '/algorithms' || location.pathname === '/builder'} />
           <SidebarItem to="/monitor" icon={Video} label="视频监控" active={location.pathname === '/monitor'} />
           <SidebarItem to="/reports" icon={BarChart3} label="报表中心" active={location.pathname === '/reports'} />
+          <SidebarItem to="/devices" icon={Video} label="设备管理" active={location.pathname === '/devices'} />
+          <SidebarItem to="/analysis" icon={BarChart3} label="数据分析" active={location.pathname === '/analysis'} />
 
           <div className="px-6 text-[10px] font-bold text-tertiary uppercase tracking-wider mb-2 mt-6">系统配置</div>
-          <SidebarItem to="#" icon={Settings} label="全局设置" active={false} />
-          <SidebarItem to="#" icon={Users} label="用户权限" active={false} />
+          <SidebarItem to="/settings" icon={Settings} label="全局设置" active={location.pathname === '/settings'} />
+          <SidebarItem to="/permissions" icon={Users} label="用户权限" active={location.pathname === '/permissions'} />
         </div>
 
         <div className="p-4 border-t border-border-color">

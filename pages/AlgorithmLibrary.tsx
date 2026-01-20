@@ -123,12 +123,13 @@ const AlgorithmLibrary: React.FC = () => {
   
   // Handlers
   const handleConfig = (alg: Algorithm) => {
-    alert(`配置算法：${alg.name}\n\n准确率：${alg.accuracy}%\n状态：${alg.status === 'online' ? '在线' : '离线'}`);
+    console.log('配置算法:', alg);
+    // TODO: 打开配置Modal
   };
   
   const handleToggle = (alg: Algorithm) => {
-    const newStatus = alg.status === 'online' ? '离线' : '在线';
-    alert(`算法 "${alg.name}" 状态已切换为：${newStatus}`);
+    console.log('切换算法状态:', alg.name);
+    // TODO: 实际切换状态并更新UI
   };
 
   return (

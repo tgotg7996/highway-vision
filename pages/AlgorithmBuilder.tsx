@@ -16,6 +16,44 @@ const AlgorithmBuilder: React.FC = () => {
     { id: '2', sender: 'user', text: '检测未穿反光背心的人员' },
     { id: '3', sender: 'system', text: '理解。我正在为识别出的“人”类配置“反光背心”的负向检测过滤器。', tags: ['零样本', 'LoRA'] },
   ]);
+  
+  const [inputMessage, setInputMessage] = React.useState('');
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  
+  const handleSendMessage = () => {
+    if (!inputMessage.trim()) return;
+    
+    const newMessage: ChatMessage = {
+      id: Date.now().toString(),
+      sender: 'user',
+      text: inputMessage
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setInputMessage('');
+    
+    // Simulate AI response
+    setTimeout(() => {
+      const aiResponse: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: 'system',
+        text: '正在分析您的需求...'
+      };
+      setMessages(prev => [...prev, aiResponse]);
+    }, 1000);
+  };
+  
+  const handleQuickAction = (action: string) => {
+    setInputMessage(action.replace('+ ', ''));
+  };
 
   return (
     <div className="flex h-full">
@@ -61,18 +99,38 @@ const AlgorithmBuilder: React.FC = () => {
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
 
         <div className="p-6 pt-2 bg-surface-darker">
           <div className="relative group">
-            <textarea className="w-full bg-grey-1700 text-white border border-border-color rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none h-[50px] transition-all placeholder:text-muted" placeholder="优化您的算法或添加约束条件..."></textarea>
-            <button className="absolute right-2 top-1.5 p-1.5 bg-primary text-[#0f231e] rounded-lg hover:bg-white hover:text-black transition-all duration-200 shadow-lg shadow-primary/20 cursor-pointer" aria-label="Send message">
+            <textarea 
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+              className="w-full bg-grey-1700 text-white border border-border-color rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none h-[50px] transition-all placeholder:text-muted" 
+              placeholder="优化您的算法或添加约束条件..."
+            />
+            <button 
+              onClick={handleSendMessage}
+              className="absolute right-2 top-1.5 p-1.5 bg-primary text-[#0f231e] rounded-lg hover:bg-white hover:text-black transition-all duration-200 shadow-lg shadow-primary/20 cursor-pointer" 
+              aria-label="Send message"
+            >
               <ArrowUp size={20} />
             </button>
           </div>
           <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
             {['+ 提高灵敏度', '+ 忽略背景', '+ 添加遮挡'].map(action => (
-                <button key={action} className="whitespace-nowrap px-3 py-1.5 rounded-full bg-grey-1600 text-xs text-secondary hover:text-white hover:bg-grey-1500 transition-all duration-200 border border-transparent hover:border-[#4a6b63] cursor-pointer">
+                <button 
+                  key={action} 
+                  onClick={() => handleQuickAction(action)}
+                  className="whitespace-nowrap px-3 py-1.5 rounded-full bg-grey-1600 text-xs text-secondary hover:text-white hover:bg-grey-1500 transition-all duration-200 border border-transparent hover:border-[#4a6b63] cursor-pointer"
+                >
                     {action}
                 </button>
             ))}
