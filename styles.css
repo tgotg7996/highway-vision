@@ -3,19 +3,45 @@
    ==================================== */
 
 :root {
-  /* Colors */
-  --color-primary: #51fbd3;
-  --color-primary-dark: #4adcb8;
-  --color-primary-hover: #66fcdb;
+  /* Primary Colors - 基于色卡中段值 */
+  --color-primary: #45ACAC;        /* 1000 - 主色调 */
+  --color-primary-dark: #34A0A0;   /* 1100 - 深色变体 */
+  --color-primary-hover: #56B8B9;  /* 900 - 悬停状态 */
+  --color-primary-light: #67BEBE;  /* 800 - 浅色变体 */
 
+  /* Greyscale System - 完整灰度系统 */
+  --grey-50: #E0F8FF;
+  --grey-100: #C0F1F1;
+  --grey-200: #C5EAEA;
+  --grey-300: #B0E3E3;
+  --grey-400: #ABDCDC;
+  --grey-500: #99D5D5;
+  --grey-600: #88CECF;
+  --grey-700: #77C5C5;
+  --grey-800: #67BEBE;
+  --grey-900: #56B8B9;
+  --grey-1000: #45ACAC;
+  --grey-1100: #34A0A0;
+  --grey-1200: #3A9E9C;
+  --grey-1300: #3B979C;
+  --grey-1400: #34868C;
+  --grey-1500: #3E505B;
+  --grey-1600: #274060;
+  --grey-1700: #243E3E;
+  --grey-1800: #1E3B3B;
+  --grey-1900: #1E1E1E;
+
+  /* Functional Colors */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
 
-  --color-background-dark: #0f231e;
-  --color-surface-dark: #162e29;
-  --color-surface-darker: #101817;
-  --color-border: #273a36;
+  /* Background & Surface Colors */
+  --color-background-dark: #1E3B3B;    /* 1800 - 最深背景 */
+  --color-surface-dark: #243E3E;       /* 1700 - 表面色 */
+  --color-surface-darker: #1E1E1E;     /* 1900 - 更深表面 */
+  --color-border: #34868C;             /* 1400 - 边框色 */
+  --color-border-light: #3E505B;       /* 1500 - 浅边框 */
 
   /* Spacing Scale */
   --space-xs: 0.5rem; /* 8px */
@@ -30,9 +56,9 @@
   --transition-normal: 250ms;
   --transition-slow: 500ms;
 
-  /* Shadows */
-  --shadow-glow: 0 0 15px rgba(81, 251, 211, 0.15);
-  --shadow-glow-hover: 0 0 25px rgba(81, 251, 211, 0.3);
+  /* Shadows - 使用主色调 */
+  --shadow-glow: 0 0 15px rgba(69, 172, 172, 0.15);
+  --shadow-glow-hover: 0 0 25px rgba(69, 172, 172, 0.3);
   --shadow-card:
     0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   --shadow-card-hover:

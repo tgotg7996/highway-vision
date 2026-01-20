@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Flame, 
@@ -14,11 +14,12 @@ import {
   Package,
   Zap,
   Activity,
-  AlertTriangle
+  AlertTriangle,
+  X
 } from 'lucide-react';
 import { Algorithm } from '../types';
 
-const AlgorithmCard: React.FC<{ alg: Algorithm; onConfig?: () => void }> = ({ alg, onConfig }) => {
+const AlgorithmCard: React.FC<{ alg: Algorithm; onConfig?: () => void; onToggle?: () => void }> = ({ alg, onConfig, onToggle }) => {
   const Icon = alg.icon === 'fire' ? Flame :
                alg.icon === 'car' ? Car :
                alg.icon === 'walk' ? UserX :
@@ -101,16 +102,34 @@ const StatCard: React.FC<{ title: string; value: string; icon: any; color: strin
 
 const AlgorithmLibrary: React.FC = () => {
   const navigate = useNavigate();
+  
+  // Filter state 
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const algorithms: Algorithm[] = [
     { id: '1', name: '火灾烟雾检测', description: '实时识别隧道及路面的火光与烟雾，支持极早期预警。', accuracy: 99.2, status: 'online', icon: 'fire', color: 'orange', type: 'safety' },
     { id: '2', name: '违章停车检测', description: '自动检测应急车道占用及主路异常停车行为。', accuracy: 97.5, status: 'online', icon: 'car', color: 'blue', type: 'traffic' },
     { id: '3', name: '行人闯入检测', description: '全天候监测行人非法进入高速公路主路区域。', accuracy: 98.8, status: 'online', icon: 'walk', color: 'red', type: 'safety' },
     { id: '4', name: '交通拥堵检测', description: '分析车流密度和平均速度，识别常发性拥堵路段。', accuracy: 95.0, status: 'offline', icon: 'traffic', color: 'yellow', type: 'traffic' },
-    { id: '5', name: '路面抛洒物检测', description: '识别路面上的障碍物、货物掉落等异常情况。', accuracy: 92.4, status: 'online', icon: 'trash', color: 'teal', type: 'road' },
+    { id: '5', name: '路面抛撒物检测', description: '识别路面上的障碍物、货物掉落等异常情况。', accuracy: 92.4, status: 'online', icon: 'trash', color: 'teal', type: 'road' },
     { id: '6', name: '施工区域入侵', description: '监测非施工车辆或人员误入施工隔离区域。', accuracy: 96.3, status: 'online', icon: 'worker', color: 'indigo', type: 'safety' },
     { id: '7', name: '能见度检测', description: '基于视频分析的大雾、暴雨等低能见度天气检测。', accuracy: 91.0, status: 'offline', icon: 'fog', color: 'slate', type: 'weather' },
   ];
+  
+  // Filter algorithms by category
+  const filteredAlgorithms = activeCategory === 'all' 
+    ? algorithms 
+    : algorithms.filter(alg => alg.type === activeCategory);
+  
+  // Handlers
+  const handleConfig = (alg: Algorithm) => {
+    alert(`配置算法：${alg.name}\n\n准确率：${alg.accuracy}%\n状态：${alg.status === 'online' ? '在线' : '离线'}`);
+  };
+  
+  const handleToggle = (alg: Algorithm) => {
+    const newStatus = alg.status === 'online' ? '离线' : '在线';
+    alert(`算法 "${alg.name}" 状态已切换为：${newStatus}`);
+  };
 
   return (
     <div className="flex-1 overflow-y-auto p-8 relative z-10 bg-[url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center h-full">
@@ -139,12 +158,17 @@ const AlgorithmLibrary: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-white">算法列表</h2>
           <div className="flex gap-2">
-            {['全部', '交通事件', '车辆特征', '道路设施'].map((filter, idx) => (
+            {[{ label: '全部', value: 'all' }, { label: '安全事件', value: 'safety' }, { label: '交通监测', value: 'traffic' }, { label: '路面监测', value: 'road' }].map((filter) => (
                <button 
-                key={filter}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${idx === 0 ? 'bg-surface-dark border-border-color text-white' : 'bg-transparent border-transparent text-[#9abcb4] hover:text-white'}`}
+                key={filter.value}
+                onClick={() => setActiveCategory(filter.value)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all duration-200 cursor-pointer ${
+                  activeCategory === filter.value 
+                    ? 'bg-primary/20 border-primary/30 text-primary' 
+                    : 'bg-transparent border-transparent text-[#9abcb4] hover:text-white hover:bg-white/5'
+                }`}
                >
-                 {filter}
+                 {filter.label}
                </button>
             ))}
           </div>
