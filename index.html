@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Eye - Smart Highway</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#51fbd3",
+              "primary-dark": "#4adcb8",
+              "background-dark": "#0f231e",
+              "surface-dark": "#162e29",
+              "surface-darker": "#101817",
+              "border-color": "#273a36",
+            },
+            boxShadow: {
+              glow: "0 0 15px rgba(81, 251, 211, 0.15)",
+              "glow-hover": "0 0 25px rgba(81, 251, 211, 0.3)",
+            },
+            animation: {
+              "spin-slow": "spin 3s linear infinite",
+              pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f231e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #273a36;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #51fbd3;
+      }
+      .glass-panel {
+        background: rgba(22, 46, 41, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(39, 58, 54, 0.8);
+      }
+      .scanline {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #51fbd3;
+        box-shadow: 0 0 10px #51fbd3;
+        animation: scan 4s linear infinite;
+        z-index: 10;
+        opacity: 0.5;
+      }
+      @keyframes scan {
+        0% { top: 0%; opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.5; }
+        100% { top: 100%; opacity: 0; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="/styles.css">
+</head>
+  <body class="bg-background-dark text-white overflow-hidden">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
