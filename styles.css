@@ -158,6 +158,19 @@ body {
 .text-data { color: var(--color-text-data); }
 
 /* ====================================
+   Form Elements
+   ==================================== */
+
+select {
+  color-scheme: dark;
+}
+
+select option {
+  background-color: var(--grey-1700);
+  color: white;
+}
+
+/* ====================================
    Utility Classes
    ==================================== */
 

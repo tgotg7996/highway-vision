@@ -152,8 +152,8 @@ const Settings: React.FC = () => {
                 onChange={(e) => setSettings({...settings, display: {...settings.display, timezone: e.target.value}})}
                 className="w-full bg-grey-1700 border border-border-color rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary cursor-pointer"
               >
-                <option value="Asia/Shanghai" className="bg-grey-1700 text-white">北京时间 (UTC+8)</option>
-                <option value="UTC" className="bg-grey-1700 text-white">协调世界时 (UTC)</option>
+                <option value="Asia/Shanghai">北京时间 (UTC+8)</option>
+                <option value="UTC">协调世界时 (UTC)</option>
               </select>
             </div>
           </div>
