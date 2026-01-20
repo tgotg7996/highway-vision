@@ -43,6 +43,25 @@
   --color-border: #34868C;             /* 1400 - 边框色 */
   --color-border-light: #3E505B;       /* 1500 - 浅边框 */
 
+  /* Semantic Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: var(--grey-200);   /* #9abcb4 */
+  --color-text-tertiary: var(--grey-400);    /* #5c7a72 */
+  --color-text-muted: var(--grey-500);
+
+  /* Semantic Background Colors */
+  --color-bg-page: var(--grey-1900);         /* 页面背景 */
+  --color-bg-elevated: var(--grey-1800);     /* 提升表面 */
+  --color-bg-card: var(--grey-1700);         /* 卡片背景 */
+  --color-bg-input: var(--grey-1700);        /* 输入框背景 */
+  --color-bg-panel: var(--grey-1600);        /* 面板背景 */
+
+  /* Semantic Interactive States */
+  --color-hover-bg: var(--grey-1500);        /* 悬停背景 */
+  --color-active-bg: var(--grey-1400);       /* 激活背景 */
+  --color-disabled-bg: var(--grey-1600);
+  --color-disabled-text: var(--grey-600);
+
   /* Spacing Scale */
   --space-xs: 0.5rem; /* 8px */
   --space-sm: 0.75rem; /* 12px */

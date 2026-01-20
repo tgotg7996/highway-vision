@@ -56,14 +56,14 @@ const AlgorithmCard: React.FC<{ alg: Algorithm; onConfig?: () => void; onToggle?
       </div>
       
       <h3 className="text-lg font-bold text-white mb-1 group-hover:text-primary transition-colors">{alg.name}</h3>
-      <p className="text-[#9abcb4] text-xs mb-6 line-clamp-2">{alg.description}</p>
+      <p className="text-grey-200 text-xs mb-6 line-clamp-2">{alg.description}</p>
       
       <div className="mt-auto">
-        <div className="flex justify-between text-xs text-[#9abcb4] mb-2">
+        <div className="flex justify-between text-xs text-grey-200 mb-2">
           <span>准确率</span>
           <span className="text-white font-mono">{alg.accuracy}%</span>
         </div>
-        <div className="w-full h-1.5 bg-[#0f231e] rounded-full overflow-hidden mb-5">
+        <div className="w-full h-1.5 bg-grey-1800 rounded-full overflow-hidden mb-5">
           <div className={`h-full bg-gradient-to-r ${barColor}`} style={{ width: `${alg.accuracy}%` }}></div>
         </div>
         
@@ -91,7 +91,7 @@ const AlgorithmCard: React.FC<{ alg: Algorithm; onConfig?: () => void; onToggle?
 const StatCard: React.FC<{ title: string; value: string; icon: any; color: string; subColor: string }> = ({ title, value, icon: Icon, color, subColor }) => (
     <div className="glass-panel p-5 rounded-xl border border-border-color flex items-center justify-between">
     <div>
-        <p className="text-[#9abcb4] text-xs font-medium mb-1">{title}</p>
+        <p className="text-grey-200 text-xs font-medium mb-1">{title}</p>
         <p className={`text-2xl font-bold ${subColor}`}>{value}</p>
     </div>
     <div className={`size-10 rounded-full flex items-center justify-center ${color}`}>
@@ -133,7 +133,7 @@ const AlgorithmLibrary: React.FC = () => {
 
   return (
     <div className="flex-1 overflow-y-auto p-8 relative z-10 bg-[url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center h-full">
-      <div className="absolute inset-0 bg-[#0f231e]/95 backdrop-blur-sm z-0"></div>
+      <div className="absolute inset-0 bg-grey-1800/95 backdrop-blur-sm z-0"></div>
       
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-8">
@@ -165,7 +165,7 @@ const AlgorithmLibrary: React.FC = () => {
                 className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all duration-200 cursor-pointer ${
                   activeCategory === filter.value 
                     ? 'bg-primary/20 border-primary/30 text-primary' 
-                    : 'bg-transparent border-transparent text-[#9abcb4] hover:text-white hover:bg-white/5'
+                    : 'bg-transparent border-transparent text-grey-200 hover:text-white hover:bg-white/5'
                 }`}
                >
                  {filter.label}
@@ -184,11 +184,11 @@ const AlgorithmLibrary: React.FC = () => {
             onClick={() => navigate('/builder')}
             className="group relative border border-dashed border-border-color rounded-xl p-6 hover:border-primary/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center cursor-pointer min-h-[260px]"
           >
-            <div className="size-16 rounded-full bg-surface-dark flex items-center justify-center text-[#5c7a72] group-hover:text-primary group-hover:bg-primary/10 transition-all mb-4">
+            <div className="size-16 rounded-full bg-surface-dark flex items-center justify-center text-grey-400 group-hover:text-primary group-hover:bg-primary/10 transition-all mb-4">
               <Plus size={32} />
             </div>
             <h3 className="text-lg font-bold text-white mb-1">自定义算法</h3>
-            <p className="text-[#5c7a72] text-xs text-center px-4">使用 AI Studio 创建新的检测模型</p>
+            <p className="text-grey-400 text-xs text-center px-4">使用 AI Studio 创建新的检测模型</p>
           </div>
         </div>
       </div>

@@ -53,17 +53,17 @@ const VideoMonitor: React.FC = () => {
             <header className="h-14 border-b border-border-color flex items-center justify-between px-6 lg:px-8 bg-surface-darker shrink-0 z-20">
                 <div className="w-full max-w-2xl">
                     <label className="flex w-full items-center relative group">
-                        <div className="absolute left-4 text-[#9abcb4] group-focus-within:text-primary transition-colors">
+                        <div className="absolute left-4 text-grey-200 group-focus-within:text-primary transition-colors">
                             <Search size={20} />
                         </div>
                         <input className="w-full h-9 bg-[#1f2e2a] border border-border-color rounded-full pl-12 pr-4 text-sm text-white placeholder-[#5a7a72] focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all shadow-inner" placeholder="通过自然语言搜索视频（例如：显示非法停放的红色卡车）" type="text" />
-                        <button className="absolute right-2 top-1 bg-border-color hover:bg-primary/20 hover:text-primary text-[#9abcb4] p-1.5 rounded-full transition-colors">
+                        <button className="absolute right-2 top-1 bg-border-color hover:bg-primary/20 hover:text-primary text-grey-200 p-1.5 rounded-full transition-colors">
                             <Mic size={18} />
                         </button>
                     </label>
                 </div>
                 <div className="flex items-center gap-4 ml-6">
-                    <div className="flex items-center gap-2 text-[#9abcb4]">
+                    <div className="flex items-center gap-2 text-grey-200">
                         <Clock size={20} />
                         <span className="text-sm font-mono">{time}</span>
                     </div>
@@ -79,7 +79,7 @@ const VideoMonitor: React.FC = () => {
                                 <Video className="text-primary" />
                                 视频监控 - 01号摄像机
                             </h2>
-                            <p className="text-[#9abcb4] text-xs mt-1 ml-8">高速服务区 A • 延迟: 12ms</p>
+                            <p className="text-grey-200 text-xs mt-1 ml-8">高速服务区 A • 延迟: 12ms</p>
                         </div>
                         <div className="flex gap-2">
                             <button 
@@ -87,7 +87,7 @@ const VideoMonitor: React.FC = () => {
                                 className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 border transition-all duration-200 cursor-pointer ${
                                     viewMode === 'grid' 
                                         ? 'bg-primary/20 text-primary border-primary/20 hover:bg-primary/30'
-                                        : 'bg-surface-dark text-white border-transparent hover:bg-[#39564f] hover:border-[#5a7a72]'
+                                        : 'bg-surface-dark text-white border-transparent hover:bg-grey-1500 hover:border-[#5a7a72]'
                                 }`}
                             >
                                 <LayoutGrid size={16} /> 网格视图
@@ -97,7 +97,7 @@ const VideoMonitor: React.FC = () => {
                                 className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 border transition-all duration-200 cursor-pointer ${
                                     viewMode === 'focus'
                                         ? 'bg-primary/20 text-primary border-primary/20 hover:bg-primary/30'
-                                        : 'bg-surface-dark text-white border-transparent hover:bg-[#39564f] hover:border-[#5a7a72]'
+                                        : 'bg-surface-dark text-white border-transparent hover:bg-grey-1500 hover:border-[#5a7a72]'
                                 }`}
                             >
                                 <Target size={16} /> 聚焦模式
@@ -128,9 +128,9 @@ const VideoMonitor: React.FC = () => {
                                     <img alt="Crop" className="w-full h-full object-cover grayscale brightness-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0DWt4H8XzBDQ8F4dwwSWMh0cIiR9NSsXIVWmfbtOzyuhT2vU5cujMzCod64--qgMeAJPzt30Wv5mplFMsDtyYZRyiYjOGLbbL2GEM8kh5pu85R6pH-vRwszIYyKuMVjyqOyUmkDEy-1owD6Ku2Hr9O5IdaAAMVDNaK8DTgJQewMMCPl86b7VBcweDVnjRVVqfRfTefZ7X0DpvZsQ3Uwindw1FOqX6PEJs2R_5T_ltKajTW7X_ftngWdnkBHiSW0g7Z7vyMTBwZAwI"/>
                                 </div>
                                 <div className="flex-1 space-y-1">
-                                    <p className="text-[10px] text-[#9abcb4]">置信度: 97.4%</p>
-                                    <p className="text-[10px] text-[#9abcb4]">偏移量: 56mm</p>
-                                    <p className="text-[10px] text-[#9abcb4]">开口间隙: 76mm</p>
+                                    <p className="text-[10px] text-grey-200">置信度: 97.4%</p>
+                                    <p className="text-[10px] text-grey-200">偏移量: 56mm</p>
+                                    <p className="text-[10px] text-grey-200">开口间隙: 76mm</p>
                                     <div className="mt-2 h-1 bg-border-color rounded-full overflow-hidden">
                                         <div className="w-4/5 h-full bg-red-500"></div>
                                     </div>
@@ -196,7 +196,7 @@ const VideoMonitor: React.FC = () => {
                                         className={`px-2 py-1 text-[11px] rounded cursor-pointer transition-all duration-200 ${
                                             activeFilters.includes(tag)
                                                 ? 'bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20'
-                                                : 'bg-surface-dark border border-border-color text-[#9abcb4] hover:border-primary/50 hover:text-primary'
+                                                : 'bg-surface-dark border border-border-color text-grey-200 hover:border-primary/50 hover:text-primary'
                                         }`}
                                     >
                                         {tag}
@@ -207,7 +207,7 @@ const VideoMonitor: React.FC = () => {
                                     className={`px-2 py-1 text-[11px] rounded cursor-pointer transition-all duration-200 ${
                                         activeFilters.includes('井盖')
                                             ? 'bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20'
-                                            : 'bg-surface-dark border border-border-color text-[#9abcb4] hover:border-primary/50 hover:text-primary'
+                                            : 'bg-surface-dark border border-border-color text-grey-200 hover:border-primary/50 hover:text-primary'
                                     }`}
                                 >
                                     井盖
@@ -217,7 +217,7 @@ const VideoMonitor: React.FC = () => {
                     </div>
 
                     <div className="flex-1 bg-surface-dark border border-border-color rounded-xl overflow-hidden flex flex-col">
-                        <div className="p-4 border-b border-border-color bg-[#1a2b27] flex justify-between items-center shrink-0">
+                        <div className="p-4 border-b border-border-color bg-grey-1700 flex justify-between items-center shrink-0">
                             <h3 className="text-white font-semibold flex items-center gap-2 text-sm">
                                 <AlertTriangle className="text-orange-400" size={16} />
                                 事件信息
@@ -234,12 +234,12 @@ const VideoMonitor: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-white text-sm font-medium">井盖破损</h4>
-                                            <p className="text-[10px] text-[#9abcb4] font-mono mt-0.5">2023-03-16 14:34:23</p>
+                                            <p className="text-[10px] text-grey-200 font-mono mt-0.5">2023-03-16 14:34:23</p>
                                         </div>
                                     </div>
                                     <span className="text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded font-bold">最新告警</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-[10px] text-[#9abcb4] pl-15">
+                                <div className="flex items-center gap-2 text-[10px] text-grey-200 pl-15">
                                     <MapPin size={14} /> 锦绣东路金粤路
                                 </div>
                                 {/* Status Flow */}
@@ -248,7 +248,7 @@ const VideoMonitor: React.FC = () => {
                                     {['上报', '受理', '派单', '处置', '核查'].map((step, idx) => (
                                          <div key={step} className="flex flex-col items-center gap-1 z-10 relative">
                                             <div className={`w-2.5 h-2.5 rounded-full border-4 border-surface-dark ${idx < 2 ? 'bg-primary shadow-glow' : 'bg-border-color'}`}></div>
-                                            <span className={`text-[9px] ${idx < 2 ? 'text-primary font-bold' : 'text-[#5a7a72]'}`}>{step}</span>
+                                            <span className={`text-[9px] ${idx < 2 ? 'text-primary font-bold' : 'text-grey-400'}`}>{step}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -265,7 +265,7 @@ const VideoMonitor: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-white text-sm font-medium">非法停放</h4>
-                                            <p className="text-[10px] text-[#9abcb4] font-mono mt-0.5">2023-03-16 12:10:05</p>
+                                            <p className="text-[10px] text-grey-200 font-mono mt-0.5">2023-03-16 12:10:05</p>
                                         </div>
                                     </div>
                                     <span className="text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold border border-primary/30">已完成</span>

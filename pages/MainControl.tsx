@@ -59,7 +59,7 @@ const MainControl: React.FC = () => {
     return (
         <div className="h-screen w-full bg-[#050f12] text-white flex flex-col font-sans">
             {/* Header */}
-            <header className="h-20 flex items-center justify-between px-8 border-b border-[#1a3d3f] bg-[#0a1f22]/80 relative z-[300] overflow-visible">
+            <header className="h-20 flex items-center justify-between px-8 border-b border-grey-1400 bg-[#0a1f22]/80 relative z-[300] overflow-visible">
                 <div className="flex items-center gap-5">
                     <div className="w-10 h-10 rounded bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-glow">
                         <Activity className="text-white" size={24} />
@@ -84,7 +84,7 @@ const MainControl: React.FC = () => {
                     <div className="relative group">
                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" size={18} />
                          <input 
-                            className="bg-black/20 border border-[#1a3d3f] text-base rounded-full pl-10 pr-6 py-2 w-80 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-gray-300 placeholder-gray-500 transition-all" 
+                            className="bg-black/20 border border-grey-1400 text-base rounded-full pl-10 pr-6 py-2 w-80 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-gray-300 placeholder-gray-500 transition-all" 
                             placeholder="全局搜索：路路 ID / 设备号 / 事件..." 
                             type="text"
                             value={searchQuery}
@@ -124,7 +124,7 @@ const MainControl: React.FC = () => {
 
             <div className="flex flex-1 overflow-auto">
                 {/* Map Area */}
-                <main className="w-[70%] relative bg-[#081014] flex-shrink-0 border-r border-[#1a3d3f] overflow-hidden group flex items-center justify-center">
+                <main className="w-[70%] relative bg-[#081014] flex-shrink-0 border-r border-grey-1400 overflow-hidden group flex items-center justify-center">
                     
                     {/* Layered Map Background */}
                     <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
@@ -191,7 +191,7 @@ const MainControl: React.FC = () => {
                 </main>
 
                 {/* Right Panel */}
-                <aside className="w-[30%] bg-[#081518]/95 backdrop-blur-md flex flex-col p-6 border-l border-[#1a3d3f] relative z-10">
+                <aside className="w-[30%] bg-[#081518]/95 backdrop-blur-md flex flex-col p-6 border-l border-grey-1400 relative z-10">
                     <div className="flex items-center justify-between mb-10 flex-shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="w-1 h-6 bg-primary shadow-glow"></div>
@@ -281,7 +281,7 @@ const MainControl: React.FC = () => {
                 </aside>
             </div>
 
-            <footer className="h-8 bg-[#03080a] border-t border-[#1a3d3f] flex items-center justify-between px-6 text-[10px] text-gray-500 font-mono z-30 flex-shrink-0">
+            <footer className="h-8 bg-[#03080a] border-t border-grey-1400 flex items-center justify-between px-6 text-[10px] text-gray-500 font-mono z-30 flex-shrink-0">
                 <div className="flex gap-6">
                     <span className="flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
