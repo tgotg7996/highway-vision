@@ -154,9 +154,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             </header>
         )}
-        
-        <main className="flex-1 overflow-hidden relative">
-            {children}
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col h-full overflow-hidden">
+          {children}
         </main>
       </div>
       
