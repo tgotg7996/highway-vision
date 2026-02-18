@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Flame, 
-  Car, 
-  UserX, 
-  TrafficCone, 
-  Trash2, 
-  HardHat, 
-  CloudFog, 
-  Plus, 
+import {
+  Flame,
+  Car,
+  UserX,
+  TrafficCone,
+  Trash2,
+  HardHat,
+  CloudFog,
+  Plus,
   SlidersHorizontal,
   Play,
   Package,
@@ -18,6 +18,7 @@ import {
   X
 } from 'lucide-react';
 import { Algorithm } from '../types';
+import api from '../src/services/api';
 
 const AlgorithmCard: React.FC<{ alg: Algorithm; onConfig?: () => void; onToggle?: () => void }> = ({ alg, onConfig, onToggle }) => {
   const Icon = alg.icon === 'fire' ? Flame :
@@ -102,34 +103,61 @@ const StatCard: React.FC<{ title: string; value: string; icon: any; color: strin
 
 const AlgorithmLibrary: React.FC = () => {
   const navigate = useNavigate();
-  
-  // Filter state 
-  const [activeCategory, setActiveCategory] = useState<string>('all');
 
-  const algorithms: Algorithm[] = [
-    { id: '1', name: '火灾烟雾检测', description: '实时识别隧道及路面的火光与烟雾，支持极早期预警。', accuracy: 99.2, status: 'online', icon: 'fire', color: 'orange', type: 'safety' },
-    { id: '2', name: '违章停车检测', description: '自动检测应急车道占用及主路异常停车行为。', accuracy: 97.5, status: 'online', icon: 'car', color: 'blue', type: 'traffic' },
-    { id: '3', name: '行人闯入检测', description: '全天候监测行人非法进入高速公路主路区域。', accuracy: 98.8, status: 'online', icon: 'walk', color: 'red', type: 'safety' },
-    { id: '4', name: '交通拥堵检测', description: '分析车流密度和平均速度，识别常发性拥堵路段。', accuracy: 95.0, status: 'offline', icon: 'traffic', color: 'yellow', type: 'traffic' },
-    { id: '5', name: '路面抛撒物检测', description: '识别路面上的障碍物、货物掉落等异常情况。', accuracy: 92.4, status: 'online', icon: 'trash', color: 'teal', type: 'road' },
-    { id: '6', name: '施工区域入侵', description: '监测非施工车辆或人员误入施工隔离区域。', accuracy: 96.3, status: 'online', icon: 'worker', color: 'indigo', type: 'safety' },
-    { id: '7', name: '能见度检测', description: '基于视频分析的大雾、暴雨等低能见度天气检测。', accuracy: 91.0, status: 'offline', icon: 'fog', color: 'slate', type: 'weather' },
-  ];
-  
-  // Filter algorithms by category
-  const filteredAlgorithms = activeCategory === 'all' 
-    ? algorithms 
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [algorithms, setAlgorithms] = useState<Algorithm[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const [stats, setStats] = useState({
+    total: 0,
+    online: 0,
+    avgAccuracy: 0,
+    todayAlerts: 0,
+  });
+
+  useEffect(() => {
+    const fetchAlgorithms = async () => {
+      try {
+        const response = await api.algorithms.getAll() as { data: Algorithm[] };
+        setAlgorithms(response.data || []);
+
+        const data = response.data || [];
+        setStats({
+          total: data.length,
+          online: data.filter((alg: Algorithm) => alg.status === 'online').length,
+          avgAccuracy: data.length > 0
+            ? Math.round(data.reduce((sum: number, alg: Algorithm) => sum + alg.accuracy, 0) / data.length)
+            : 0,
+          todayAlerts: 1204,
+        });
+      } catch (error) {
+        console.error('Error fetching algorithms:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAlgorithms();
+  }, []);
+
+  const filteredAlgorithms = activeCategory === 'all'
+    ? algorithms
     : algorithms.filter(alg => alg.type === activeCategory);
-  
-  // Handlers
+
   const handleConfig = (alg: Algorithm) => {
     console.log('配置算法:', alg);
-    // TODO: 打开配置Modal
   };
-  
-  const handleToggle = (alg: Algorithm) => {
-    console.log('切换算法状态:', alg.name);
-    // TODO: 实际切换状态并更新UI
+
+  const handleToggle = async (alg: Algorithm) => {
+    try {
+      await api.algorithms.toggle(alg.id);
+      setAlgorithms(algorithms.map(a =>
+        a.id === alg.id ? { ...a, status: a.status === 'online' ? 'offline' : 'online' } : a
+      ));
+    } catch (error) {
+      console.error('Error toggling algorithm:', error);
+      alert('切换算法状态失败');
+    }
   };
 
   return (
@@ -150,10 +178,10 @@ const AlgorithmLibrary: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <StatCard title="部署算法总数" value="24" icon={Package} color="bg-blue-500/10 text-blue-400" subColor="text-white" />
-            <StatCard title="正在运行" value="18" icon={Zap} color="bg-primary/10 text-primary" subColor="text-primary" />
-            <StatCard title="平均准确率" value="96.8%" icon={Activity} color="bg-purple-500/10 text-purple-400" subColor="text-white" />
-            <StatCard title="今日告警次数" value="1,204" icon={AlertTriangle} color="bg-orange-500/10 text-orange-400" subColor="text-orange-400" />
+            <StatCard title="部署算法总数" value={stats.total} icon={Package} color="bg-blue-500/10 text-blue-400" subColor="text-white" />
+            <StatCard title="正在运行" value={stats.online} icon={Zap} color="bg-primary/10 text-primary" subColor="text-primary" />
+            <StatCard title="平均准确率" value={`${stats.avgAccuracy}%`} icon={Activity} color="bg-purple-500/10 text-purple-400" subColor="text-white" />
+            <StatCard title="今日告警次数" value={stats.todayAlerts} icon={AlertTriangle} color="bg-orange-500/10 text-orange-400" subColor="text-orange-400" />
         </div>
 
         <div className="flex items-center justify-between mb-6">
@@ -177,7 +205,7 @@ const AlgorithmLibrary: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-12">
           {algorithms.map((alg) => (
-            <AlgorithmCard key={alg.id} alg={alg} onConfig={() => {}} />
+            <AlgorithmCard key={alg.id} alg={alg} onConfig={() => handleConfig(alg)} onToggle={() => handleToggle(alg)} />
           ))}
           
           {/* New Algorithm Card Placeholder */}

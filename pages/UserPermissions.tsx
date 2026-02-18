@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { 
-  Users, 
-  UserPlus, 
-  Shield, 
+import React, { useState, useEffect } from 'react';
+import {
+  Users,
+  UserPlus,
+  Shield,
   Mail,
   Calendar,
   Search,
@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   XCircle
 } from 'lucide-react';
+import api from '../src/services/api';
 
 interface User {
   id: string;
@@ -19,21 +20,30 @@ interface User {
   email: string;
   role: string;
   status: 'active' | 'inactive';
-  lastLogin: string;
+  last_login?: string;
   permissions: string[];
 }
 
 const UserPermissions: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const users: User[] = [
-    { id: 'USR-001', name: '张伟', email: 'zhang.wei@highway.ai', role: 'admin', status: 'active', lastLogin: '2024-03-21 15:30', permissions: ['all'] },
-    { id: 'USR-002', name: '李娜', email: 'li.na@highway.ai', role: 'operator', status: 'active', lastLogin: '2024-03-21 14:25', permissions: ['view', 'edit'] },
-    { id: 'USR-003', name: '王强', email: 'wang.qiang@highway.ai', role: 'viewer', status: 'active', lastLogin: '2024-03-21 12:10', permissions: ['view'] },
-    { id: 'USR-004', name: '刘芳', email: 'liu.fang@highway.ai', role: 'operator', status: 'inactive', lastLogin: '2024-03-18 09:45', permissions: ['view', 'edit'] },
-    { id: 'USR-005', name: '陈明', email: 'chen.ming@highway.ai', role: 'admin', status: 'active', lastLogin: '2024-03-21 11:20', permissions: ['all'] },
-  ];
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await api.users.getAll() as { data: User[] };
+        setUsers(response.data || []);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const roles = [
     { name: 'admin', label: '管理员', color: 'bg-primary/10 text-primary border-primary/20', count: 2 },

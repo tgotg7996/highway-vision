@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   email VARCHAR(255) UNIQUE NOT NULL,
   role VARCHAR(50) CHECK (role IN ('admin', 'operator', 'viewer')) DEFAULT 'viewer',
   status VARCHAR(20) CHECK (status IN ('active', 'inactive')) DEFAULT 'active',
-  permissions TEXT[],
+  permissions TEXT[], -- Array of permission strings
   last_login TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()

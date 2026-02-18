@@ -5,6 +5,60 @@ import { validate, schemas } from '../middleware/validation.js';
 
 const router = Router();
 
+router.post('/register', async (req: any, res: Response) => {
+  try {
+    const { email, password, name } = req.body;
+
+    if (!email || !password || !name) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email, password and name are required'
+      });
+    }
+
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (authError) {
+      return res.status(400).json({
+        success: false,
+        error: authError.message || 'Registration failed'
+      });
+    }
+
+    if (authData.user) {
+      const { error: profileError } = await supabase
+        .from('user_profiles')
+        .insert({
+          id: authData.user.id,
+          email,
+          name,
+          role: 'viewer',
+          status: 'active',
+          permissions: ['view'],
+        });
+
+      if (profileError) {
+        throw profileError;
+      }
+    }
+
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      data: authData.user
+    });
+  } catch (error: any) {
+    console.error('Error registering user:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Registration failed'
+    });
+  }
+});
+
 /**
  * GET /api/users
  * Get all users (admin only)

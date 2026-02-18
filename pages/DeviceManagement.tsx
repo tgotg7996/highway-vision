@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { 
-  Video, 
-  Wifi, 
-  WifiOff, 
-  MapPin, 
+import React, { useState, useEffect } from 'react';
+import {
+  Video,
+  Wifi,
+  WifiOff,
+  MapPin,
   Calendar,
   Search,
   Plus,
@@ -13,6 +13,7 @@ import {
   AlertCircle,
   XCircle
 } from 'lucide-react';
+import api from '../src/services/api';
 
 interface Device {
   id: string;
@@ -28,15 +29,23 @@ interface Device {
 const DeviceManagement: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [devices, setDevices] = useState<Device[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const devices: Device[] = [
-    { id: 'CAM-001', name: '东区入口摄像头', type: '高清摄像头', location: '东区服务站入口', status: 'online', ip: '192.168.1.101', lastOnline: '2024-03-21 15:42:00', uptime: '45天12小时' },
-    { id: 'CAM-002', name: '西区出口摄像头', type: '高清摄像头', location: '西区出口匝道', status: 'online', ip: '192.168.1.102', lastOnline: '2024-03-21 15:41:55', uptime: '30天8小时' },
-    { id: 'CAM-003', name: '加油站监控', type: '高清摄像头', location: '加油站入口', status: 'warning', ip: '192.168.1.103', lastOnline: '2024-03-21 15:40:12', uptime: '2天3小时' },
-    { id: 'CAM-004', name: '停车场全景', type: '全景摄像头', location: '北区停车场', status: 'online', ip: '192.168.1.104', lastOnline: '2024-03-21 15:42:05', uptime: '60天1小时' },
-    { id: 'CAM-005', name: '便利店内部', type: '室内摄像头', location: '南区便利店', status: 'offline', ip: '192.168.1.105', lastOnline: '2024-03-20 08:15:32', uptime: '-' },
-    { id: 'CAM-006', name: '主楼大厅', type: '高清摄像头', location: '主楼大厅', status: 'online', ip: '192.168.1.106', lastOnline: '2024-03-21 15:41:48', uptime: '90天6小时' },
-  ];
+  useEffect(() => {
+    const fetchDevices = async () => {
+      try {
+        const response = await api.cameras.getAll() as { data: Device[] };
+        setDevices(response.data || []);
+      } catch (error) {
+        console.error('Error fetching devices:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDevices();
+  }, []);
 
   const filteredDevices = devices.filter(device => {
     const matchesSearch = searchQuery === '' ||
@@ -52,6 +61,19 @@ const DeviceManagement: React.FC = () => {
     online: devices.filter(d => d.status === 'online').length,
     offline: devices.filter(d => d.status === 'offline').length,
     warning: devices.filter(d => d.status === 'warning').length,
+  };
+
+  const handleRefresh = async () => {
+    setLoading(true);
+    try {
+      const response = await api.cameras.getAll() as { data: Device[] };
+      setDevices(response.data || []);
+    } catch (error) {
+      console.error('Error refreshing devices:', error);
+      alert('刷新失败');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getStatusStyle = (status: string) => {
@@ -149,7 +171,7 @@ const DeviceManagement: React.FC = () => {
           添加设备
         </button>
 
-        <button className="bg-grey-1700 hover:bg-grey-1600 border border-border-color text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all cursor-pointer">
+        <button className="bg-grey-1700 hover:bg-grey-1600 border border-border-color text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all cursor-pointer" onClick={handleRefresh}>
           <RefreshCw size={18} />
           刷新
         </button>

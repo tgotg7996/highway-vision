@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
-import { 
-    CloudDownload, 
-    Plus, 
-    BarChart3, 
-    AlertTriangle, 
-    CheckCircle2, 
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+    CloudDownload,
+    Plus,
+    BarChart3,
+    AlertTriangle,
+    CheckCircle2,
     Car,
     TrendingUp,
     Calendar,
@@ -16,33 +16,37 @@ import {
     Eye
 } from 'lucide-react';
 import { EventLog } from '../types';
+import api from '../src/services/api';
 
 const ReportCenter: React.FC = () => {
-    // Mock data
-    const allEvents: EventLog[] = [
-        { id: '#EVT-8921', time: '2024-03-21 14:32:05', location: '东区服务站 A区', type: '违章停车', riskLevel: 'medium', status: 'handled' },
-        { id: '#EVT-8920', time: '2024-03-21 14:28:12', location: '加油站入口', type: '行人闯入', riskLevel: 'high', status: 'pending' },
-        { id: '#EVT-8919', time: '2024-03-21 14:15:33', location: '主楼大厅', type: '人员聚集', riskLevel: 'low', status: 'handled' },
-        { id: '#EVT-8918', time: '2024-03-21 14:02:45', location: '西区出口匝道', type: '拥堵预警', riskLevel: 'medium', status: 'observing' },
-        { id: '#EVT-8917', time: '2024-03-21 13:58:12', location: '东区服务站 B区', type: '长时停留', riskLevel: 'low', status: 'handled' },
-        { id: '#EVT-8916', time: '2024-03-21 13:45:23', location: '北区停车场', type: '车辆倒车', riskLevel: 'medium', status: 'handled' },
-        { id: '#EVT-8915', time: '2024-03-21 13:30:15', location: '主路入口', type: '超速驶入', riskLevel: 'high', status: 'pending' },
-        { id: '#EVT-8914', time: '2024-03-21 13:12:08', location: '南区便利店', type: '人员聚集', riskLevel: 'low', status: 'handled' },
-    ];
-    
-    // Filter and search state
     const [searchQuery, setSearchQuery] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+    const [events, setEvents] = useState<EventLog[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await api.events.getAll() as { data: EventLog[] };
+                setEvents(response.data || []);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEvents();
+    }, []);
     const [dateFilter, setDateFilter] = useState('all');
     const [areaFilter, setAreaFilter] = useState('all');
     const [typeFilter, setTypeFilter] = useState('all');
-    
-    // Pagination state
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    
-    // Filtered and paginated data
+
     const filteredEvents = useMemo(() => {
-        return allEvents.filter(event => {
+        return events.filter(event => {
             const matchesSearch = searchQuery === '' || 
                 event.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 event.location.toLowerCase().includes(searchQuery.toLowerCase()) ||

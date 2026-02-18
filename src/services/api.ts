@@ -168,6 +168,8 @@ export const api = {
     updatePermissions: (id: string, permissions: string[]) =>
       apiClient.patch(`/users/${id}/permissions`, { permissions }),
     delete: (id: string) => apiClient.delete(`/users/${id}`),
+    register: (email: string, password: string, name: string) =>
+      apiClient.post('/users/register', { email, password, name }),
   },
 
   // Settings API

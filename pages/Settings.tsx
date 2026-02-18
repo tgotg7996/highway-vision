@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { 
-  Settings as SettingsIcon, 
-  Bell, 
+import React, { useState, useEffect } from 'react';
+import {
+  Settings as SettingsIcon,
+  Bell,
   Monitor,
   Save,
   Shield,
@@ -9,6 +9,7 @@ import {
   Clock,
   Mail
 } from 'lucide-react';
+import api from '../src/services/api';
 
 const Settings: React.FC = () => {
   const [settings, setSettings] = useState({
@@ -32,9 +33,44 @@ const Settings: React.FC = () => {
     }
   });
 
-  const handleSave = () => {
-    console.log('保存设置:', settings);
-    // TODO: 实际保存到后端
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await api.settings.getAll() as { data: Record<string, any> };
+        if (response.data) {
+          Object.entries(response.data).forEach(([key, value]: [string, any]) => {
+            if (value.value !== undefined) {
+              setSettings((prev: any) => ({
+                ...prev,
+                [value.category || key]: {
+                  ...prev[key as keyof typeof prev],
+                  ...value.value,
+                }
+              }));
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching settings:', error);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      await api.settings.bulkUpdate(settings);
+      alert('设置保存成功！');
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      alert('保存失败');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
